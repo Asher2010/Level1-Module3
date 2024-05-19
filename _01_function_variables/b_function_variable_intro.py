@@ -8,7 +8,8 @@ def surprise():
     return 'SURPRISE!'
 
 # TODO 1) Change what is assigned into the func_1 variable so test_1 will pass
-func_1 = None
+#func_1 = print("SURPRISE!")
+
 
 # TODO 2) Change the return statement below so that test_2 will pass
 def pizza_surprise():
