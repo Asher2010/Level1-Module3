@@ -15,9 +15,13 @@ class TypingTutor(tk.Tk):
 
         # TODO: Declare and initialize a member variable to hold a
         #  random letter to type
-
+        self.letter = ""
         # TODO: Declare and initialize a label (tk.Label) and set the text to the random letter
 
+        #self.label = tk.Label(self, text=letter, bg='green', font=('Rockwell', 20, 'normal', 'underline'))
+        self.label.focus_set()
+        self.label.bind('<KeyRelease>', self.on_key_release)
+        self.label.place(relx=0.5, rely=0.5, relwidth=0.5, relheight=0.5)
         # TODO: Place the label in the center of the window
 
         # TODO: Call the label's focus_set() method so key presses can be detected
@@ -45,3 +49,6 @@ if __name__ == '__main__':
     pass
     # TODO: Create a new _b_TypingTutor object and set the title and geometry.
     #  Remember to call mainloop() at the end
+    typing_tutor = TypingTutor()
+    typing_tutor.geometry()
+    typing_tutor.mainloop()
