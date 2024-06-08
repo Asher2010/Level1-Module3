@@ -14,7 +14,7 @@ class Whack(tk.Tk):
         button_width, button_height = self.setup_buttons(num_buttons, columns_per_row)
 
         # TODO: Create a member variable for the list of buttons
-
+        #buttons
         # TODO: Create a member variable for the random mole button and
         #  initialize it to None
 
