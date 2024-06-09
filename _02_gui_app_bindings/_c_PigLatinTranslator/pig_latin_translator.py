@@ -8,12 +8,13 @@ from PigLatinConverter import PigLatinConverter
 class PigLatinTranslator(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.tt = ''
-        self.text = ''
+
+
+
         # TODO: Declare and initialize an Entry (tk.Entry) for the input text
-        self.entry = tk.Entry(self, textvariable=self.text, bg='black',
+        self.input_entry = tk.Entry(self, bg='black',
                               fg='white', font=('arial', 32, 'bold'), relief='solid')
-        self.entry.place(relx=0.0, rely=0.4, relwidth=0.4, relheight=0.2)
+        self.input_entry.place(relx=0.0, rely=0.4, relwidth=0.4, relheight=0.2)
         # TODO: Declare and initialize a Button (tk.Button) that will translate
         #  the input text to pig latin when pressed
         self.button = tk.Button(self, text='Translate', fg='blue',
@@ -22,10 +23,10 @@ class PigLatinTranslator(tk.Tk):
         self.button.bind('<ButtonPress>', self.on_button_press)
         # TODO: Declare and initialize an label (tk.Label) for the translated
         #  text
-        self.label = tk.Label(self, text=self.tt, bg='black',
+        self.label = tk.Label(self, bg='black',
                               fg='white', font=('arial', 32, 'bold'), relief='solid')
         self.label.place(relx=0.6, rely=0.4, relwidth=0.4, relheight=0.2)
-        self.entry.bind('<KeyRelease>', self.on_key_release)
+        self.input_entry.bind('<KeyRelease>', self.on_key_release)
         # TODO: Look at the example image () and place all the
         #  components in the same order
 
@@ -33,11 +34,14 @@ class PigLatinTranslator(tk.Tk):
         #  method when a key is released
 
     def on_button_press(self, event):
-        self.tt = PigLatinConverter.translate(self.text)
+        print('button pressed')
+        self.tt = PigLatinConverter.translate(self.input_entry.get())
+        self.label.config(text=self.tt)
+
 
     def on_key_release(self, event):
-
         pass
+
 
         # TODO: Use the _c_PigLatinTranslator.translate() method to translate
         #  the text in the input entry and set the text in the output entry

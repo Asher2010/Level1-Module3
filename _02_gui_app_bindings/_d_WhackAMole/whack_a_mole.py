@@ -14,10 +14,10 @@ class Whack(tk.Tk):
         button_width, button_height = self.setup_buttons(num_buttons, columns_per_row)
 
         # TODO: Create a member variable for the list of buttons
-        #buttons
+        self.buttons = []
         # TODO: Create a member variable for the random mole button and
         #  initialize it to None
-
+        self.random_mole = None
         # TODO: Use a loop to create enough buttons to fill the window.
         #  Use the 'columns_per_row', 'button_width', 'button_height' variables
         #  when calling button.place() to put each button in the correct
@@ -27,22 +27,26 @@ class Whack(tk.Tk):
             col_num = int(i % columns_per_row)
             row_y = row_num * button_height
             col_x = col_num * button_width
-
+            self.button = tk.Button(self, fg='blue',
+                                    font=('courier new', 20, 'bold'))
+            self.button.place(relx=col_x, rely=row_y, relwidth=button_width, relheight=button_height)
             # TODO: Call the button's bind() method to call the on_button_press()
             #  method when a mouse button is pressed
-            #  example: self.joke_button.bind('<ButtonPress>', self.on_button_press)
+            self.button.bind('<ButtonPress>', self.on_button_press)
 
             # TODO: Add the button to the list of buttons
-
-
+            self.buttons.append(self.button)
         # TODO: Set the mole button to the output of the random.choice() method
         #  to return a random button from the list of buttons
 
         # TODO: Call the mole button's config(text='mole!') method to set its
         #  text to 'mole!'
+        self.button.config(text='mole!')
 
     def on_button_press(self, event):
+
         button_pressed = event.widget
+
         print('button ' + repr(button_pressed) + ' clicked!')
 
         # TODO: return if button pressed is not the mole button!
