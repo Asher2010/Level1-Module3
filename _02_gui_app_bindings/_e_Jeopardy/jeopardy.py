@@ -14,9 +14,9 @@ class Jeopardy(tk.Tk):
         button_width, button_height, num_buttons = self.setup_buttons(categories)
 
         # TODO: Create a member variable for the list of categories
-
+        self.categories = []
         # TODO: Create a member variable for the score/money
-
+        self.score = 0
         for i in range(num_buttons):
             row_num = int(i / len(categories))
             col_num = int(i % len(categories))
@@ -32,27 +32,32 @@ class Jeopardy(tk.Tk):
 
                 # TODO: Place the Label using the 'col_x', 'row_y', 'button_width',
                 #  and 'button_height' variables
-
+                self.label = tk.Label(self, bg='black',
+                                      fg='white', font=('arial', 32, 'bold'), relief='solid', text=category.name)
+                self.label.place(x=col_x, y=row_y, width=button_width, height=button_height)
             elif len(category.questions) > row_num - 1:
                 value = category.questions[row_num - 1].value
 
                 # TODO: Create a tk.Button with the questions' value on the button
-
+                self.button = tk.Button(self, text='Translate', fg='blue',
+                                        font=('courier new', 20, 'bold'))
+                self.button.place(x=col_x, y=row_y, width=button_width, height=button_height)
                 # TODO: Place the Button using the 'col_x', 'row_y', 'button_width',
                 #  and 'button_height' variables
 
                 # TODO: Call the button's bind() method so the
                 #  on_button_press() method is called when a mouse button is pressed
                 #  example: self.joke_button.bind('<ButtonPress>', self.on_button_press)
-
+                self.button.bind('<ButtonPress>', self.on_button_press)
                 # TODO: Add the button to the category's list of buttons
-
+                self.categories.append(self.button)
 
     def on_button_press(self, event):
         button_pressed = event.widget
         print('button ' + repr(button_pressed) + ' clicked!')
 
         # TODO: Call the ask_question() method with button_pressed as an input
+        self.ask_question(button_pressed)
 
     def ask_question(self, button_pressed):
         for category in self.categories:
@@ -113,7 +118,7 @@ class Category:
 
 
 if __name__ == '__main__':
-    j_categories = list()
+    j_categories = list[Category("a"), Category("b"), Category("c")]
 
     # TODO: Use the Category class above to create at least 3 question categories
     #  for your _e_Jeopardy game

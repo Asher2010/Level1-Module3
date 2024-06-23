@@ -27,15 +27,21 @@ class Whack(tk.Tk):
             col_num = int(i % columns_per_row)
             row_y = row_num * button_height
             col_x = col_num * button_width
+            #self.button = tk.Button(self, fg='blue',
+                                    #font=('arial', 20, 'bold'), text='no idea', bg='red')
+            #self.button.place(relx=col_x, rely=row_y, relwidth=button_width, relheight=button_height)
             self.button = tk.Button(self, fg='blue',
                                     font=('courier new', 20, 'bold'))
-            self.button.place(relx=col_x, rely=row_y, relwidth=button_width, relheight=button_height)
+            self.button.place(x=col_x, y=row_y, width=button_width, height=button_height)
             # TODO: Call the button's bind() method to call the on_button_press()
             #  method when a mouse button is pressed
             self.button.bind('<ButtonPress>', self.on_button_press)
 
             # TODO: Add the button to the list of buttons
             self.buttons.append(self.button)
+            #print(row_y, col_x)
+            print(button_width, button_height)
+
         # TODO: Set the mole button to the output of the random.choice() method
         #  to return a random button from the list of buttons
 
@@ -50,15 +56,18 @@ class Whack(tk.Tk):
         print('button ' + repr(button_pressed) + ' clicked!')
 
         # TODO: return if button pressed is not the mole button!
+        if button_pressed != self.button:
+            return
 
         # TODO: Clear text for current mole button using
         #  the buttons' configure() method
-
+        self.button.config(text='')
         # TODO: Get new random mole button that's different from the current one
-
+        random_button = random.randint(0, num_of_buttons-1)
+        self.button = self.buttons[random_button]
         # TODO: Change the text for the new mole button using
         #  the buttons' configure() method
-
+        self.button.config(text='mole!')
 
     def setup_buttons(self, num_buttons, columns_per_row):
         # Window size needs to be updated immediately here so the
