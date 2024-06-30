@@ -14,7 +14,7 @@ class Jeopardy(tk.Tk):
         button_width, button_height, num_buttons = self.setup_buttons(categories)
 
         # TODO: Create a member variable for the list of categories
-        self.categories = []
+        self.categories = categories
         # TODO: Create a member variable for the score/money
         self.score = 0
         for i in range(num_buttons):
@@ -39,8 +39,8 @@ class Jeopardy(tk.Tk):
                 value = category.questions[row_num - 1].value
 
                 # TODO: Create a tk.Button with the questions' value on the button
-                self.button = tk.Button(self, text='Translate', fg='blue',
-                                        font=('courier new', 20, 'bold'))
+                self.button = tk.Button(self, fg='blue',
+                                        font=('courier new', 20, 'bold'), text=value)
                 self.button.place(x=col_x, y=row_y, width=button_width, height=button_height)
                 # TODO: Place the Button using the 'col_x', 'row_y', 'button_width',
                 #  and 'button_height' variables
@@ -50,7 +50,7 @@ class Jeopardy(tk.Tk):
                 #  example: self.joke_button.bind('<ButtonPress>', self.on_button_press)
                 self.button.bind('<ButtonPress>', self.on_button_press)
                 # TODO: Add the button to the category's list of buttons
-                self.categories.append(self.button)
+                category.buttons.append(self.button)
 
     def on_button_press(self, event):
         button_pressed = event.widget
@@ -74,6 +74,12 @@ class Jeopardy(tk.Tk):
                         #  the question and get their response. If their response is correct,
                         #  increase the score member variable by the value. Otherwise, subtract
                         #  value from the score
+                        response = simpledialog.askstring(title="Video Games", prompt=question)
+                        if response == answer:
+                            self.score += value
+                        else:
+                            self.score -= value
+
 
 
     def setup_buttons(self, categories):
@@ -118,13 +124,28 @@ class Category:
 
 
 if __name__ == '__main__':
-    j_categories = list[Category("a"), Category("b"), Category("c")]
+    video_games = Category("Video Games")
+    science = Category("Science")
+    math = Category("Math")
+    j_categories = [video_games, science, math]
 
     # TODO: Use the Category class above to create at least 3 question categories
     #  for your _e_Jeopardy game
 
+
+
     # TODO: For each Category, use the add_question method to add a question, answer, and
     #  a value for each question
+
+    video_games.add_question("What was the first video game?", "Tennis for two", 100)
+    science.add_question("Do identical twins have the same fingerprints", "No", 100)
+    math.add_question("What do the addition of the numbers on the opposite sides of dice add up to?", "7", 100)
+    video_games.add_question("What job did Mario originally have?", "A Carpenter", 200)
+    science.add_question("How old can Great White Sharks live for?", "50 years", 200)
+    math.add_question("What is 111,111,111 * 111,111,111?", "12,345,678,987,654,321", 200)
+    video_games.add_question("What is the most popular video game?", "Minecraft", 300)
+    science.add_question("What do lizards use to smell?", "Their tongues", 300)
+    math.add_question("What is 1,089 * 9", "9,801", 300)
 
     game = Jeopardy(j_categories)
     game.title('_e_Jeopardy')
